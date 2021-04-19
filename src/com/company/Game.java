@@ -21,19 +21,19 @@ import java.util.Scanner;
  */
 
 public class Game {
-    private ArrayList<String> rooms;
-    private ArrayList<String> descriptions;
-    private ArrayList<String> occupancies;
-    private ArrayList<String> items;
-    private ArrayList<Integer> numbers;
+    private final ArrayList<String> rooms;
+    private final ArrayList<String> descriptions;
+    private final ArrayList<String> occupancies;
+    private final ArrayList<String> items;
+    private final ArrayList<Integer> numbers;
 
-    private HashMap<String, String> roomToDesc;
-    private HashMap<String, String> roomToOccupancy;
-    private HashMap<String, String> roomToItem;
-    private HashMap<String, Integer> roomToNumber;
+    private final HashMap<String, String> roomToDesc;
+    private final HashMap<String, String> roomToOccupancy;
+    private final HashMap<String, String> roomToItem;
+    private final HashMap<String, Integer> roomToNumber;
 
     private ArrayList<String> playersItems;
-    private Parser parser;
+    private final Parser parser;
     private Room currentRoom;
 
     /**
@@ -64,48 +64,40 @@ public class Game {
      * This method will retrieve the room data from a csv file
      */
     public void getRoomData() {
-        List<List<String>> records;
-        records = new ArrayList<>();
         try (Scanner scanner = new Scanner(Paths.get("src/com/company/RoomData.csv").toFile())) {
             while (scanner.hasNextLine()) {
-                records.add(getRecordFromLine(scanner.nextLine()));
+                getRecordFromLine(scanner.nextLine());
             }
-
-
             for (int i = 0; i < (descriptions.size()); i++) {
                 roomToDesc.put(rooms.get(i), descriptions.get(i));
                 roomToOccupancy.put(rooms.get(i), occupancies.get(i));
                 roomToItem.put(rooms.get(i), items.get(i));
                 roomToNumber.put(rooms.get(i), numbers.get(i));
             }
-            scanner.close();
-
-
         } catch (FileNotFoundException ex) {
+            System.out.println("Sorry there seems to be a problem retrieving the game data..");
             ex.printStackTrace();
         }
     }
 
     /**
-     * This method will take out each record from the line and put it into a list
+     * This method will take out each record from the line and add each record to it's corresponding list
      *
      * @param line, the String value of the line
-     * @return values, the list of values from the line
      */
-        private List<String> getRecordFromLine (String line){
-            List<String> values = new ArrayList<String>();
+        private void getRecordFromLine (String line){
+            List<String> values = new ArrayList<>();
             try (Scanner rowScanner = new Scanner(line)) {
                 rowScanner.useDelimiter(",");
                 while (rowScanner.hasNext()) {
                     values.add(rowScanner.next());
                 }
+                rooms.add(values.get(0));
+                descriptions.add(values.get(1));
+                occupancies.add(values.get(2));
+                items.add(values.get(3));
+                numbers.add(Integer.valueOf(values.get(4)));
             }
-            rooms.add(values.get(0));
-            descriptions.add(values.get(1));
-            occupancies.add(values.get(2));
-            items.add(values.get(3));
-            numbers.add(Integer.valueOf(values.get(4)));
-            return values;
         }
 
 
