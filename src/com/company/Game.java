@@ -106,6 +106,7 @@ public class Game {
          */
         private void createRooms ()
         {
+            TransporterRoom transporterRoom;
             Room outside, mainHall, commonRoom, potionsLab, broomCloset, boardingRoom, hagridsHut;
             // create the rooms
             outside = new Room(roomToDesc.get("Outside"), roomToOccupancy.get("Outside"), roomToItem.get("Outside"));
@@ -116,6 +117,7 @@ public class Game {
             boardingRoom = new Room(roomToDesc.get("Boarding Room"), roomToOccupancy.get("Boarding Room"), roomToItem.get("Boarding Room"));
             hagridsHut = new Room(roomToDesc.get("Hagrid's Hut"), roomToOccupancy.get("Hagrid's Hut"), roomToItem.get("Hagrid's Hut"));
 
+            transporterRoom = new TransporterRoom("in the transporter room, this room will transport you to a random room!");
 
             // initialise room exits
             outside.setExit("east", mainHall);
@@ -128,10 +130,11 @@ public class Game {
 
             commonRoom.setExit("north", broomCloset);
             commonRoom.setExit("west", mainHall);
+            commonRoom.setExit("south", transporterRoom);
 
             potionsLab.setExit("north", mainHall);
-            potionsLab.setExit("east", outside);
-            potionsLab.setExit("west", commonRoom);
+            potionsLab.setExit("east", transporterRoom);
+            potionsLab.setExit("west", outside);
 
             boardingRoom.setExit("east", broomCloset);
             boardingRoom.setExit("south", mainHall);
@@ -140,6 +143,14 @@ public class Game {
             broomCloset.setExit("south", commonRoom);
 
             hagridsHut.setExit("east", outside);
+
+            transporterRoom.setRooms(mainHall);
+            transporterRoom.setRooms(boardingRoom);
+            transporterRoom.setRooms(commonRoom);
+            transporterRoom.setRooms(outside);
+            transporterRoom.setRooms(hagridsHut);
+            transporterRoom.setRooms(potionsLab);
+            transporterRoom.setRooms(broomCloset);
 
             currentRoom = mainHall;  // start game outside
         }
