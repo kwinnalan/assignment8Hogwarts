@@ -33,7 +33,7 @@ public class Game {
     private final HashMap<String, Integer> roomToNumber;
 
     private final ArrayList<String> PLAYERS_ITEMS;
-    private final Parser parser;
+    private final Parser PARSER;
     private Room currentRoom;
 
     /**
@@ -51,7 +51,7 @@ public class Game {
         roomToItem = new HashMap<>();
         roomToNumber = new HashMap<>();
 
-        parser = new Parser();
+        PARSER = new Parser();
         PLAYERS_ITEMS = new ArrayList<>();
 
         getRoomData();
@@ -152,7 +152,7 @@ public class Game {
             transporterRoom.setRooms(potionsLab);
             transporterRoom.setRooms(broomCloset);
 
-            currentRoom = mainHall;  // start game outside
+            currentRoom = mainHall;  // start game in main hall
         }
 
 
@@ -168,7 +168,7 @@ public class Game {
 
             boolean finished = false;
             while (!finished) {
-                Command command = parser.getCommand();
+                Command command = PARSER.getCommand();
                 finished = processCommand(command);
             }
             System.out.println("Thank you for playing.  Good bye.");
@@ -236,7 +236,7 @@ public class Game {
             System.out.println("around at Hogwarts and find Items.(there are four total!)");
             System.out.println();
             System.out.println("Your command words are:");
-            parser.showCommands();
+            PARSER.showCommands();
         }
 
     /**

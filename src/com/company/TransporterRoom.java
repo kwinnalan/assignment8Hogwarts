@@ -4,7 +4,8 @@ import java.util.Random;
 import java.util.ArrayList;
 /**
  * This is a different kind of room that will transport the player to a random location
- *  with and direction they choose.
+ *  with any direction they choose.
+ *
  * @author Kwinn Danforth
  * @version 1.0.01
  */

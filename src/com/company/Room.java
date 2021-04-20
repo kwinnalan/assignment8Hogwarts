@@ -85,7 +85,7 @@ public class Room
         }else{
             pickUpItemQuestion = "";
         }
-        return "You are " + description + ".\n" + occupancy + " is here" + "\n"+"There is " + item +" in here!" + "\n"+ pickUpItemQuestion + "\n" + getExitString();
+        return "You are " + description + ".\n" + occupancy + " is here," + "\n"+"There is " + item +" in here!" + "\n"+ pickUpItemQuestion + "\n" + getExitString();
 
     }
 
