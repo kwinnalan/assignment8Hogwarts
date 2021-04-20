@@ -32,7 +32,7 @@ public class Game {
     private final HashMap<String, String> roomToItem;
     private final HashMap<String, Integer> roomToNumber;
 
-    private ArrayList<String> playersItems;
+    private final ArrayList<String> PLAYERS_ITEMS;
     private final Parser parser;
     private Room currentRoom;
 
@@ -52,7 +52,7 @@ public class Game {
         roomToNumber = new HashMap<>();
 
         parser = new Parser();
-        playersItems = new ArrayList<>();
+        PLAYERS_ITEMS = new ArrayList<>();
 
         getRoomData();
         createRooms();
@@ -211,12 +211,9 @@ public class Game {
                     goRoom(command);
                     break;
 
-                case YES:
+                case PICKUP:
                     addItem(currentRoom.getItem());
                     currentRoom.setItem("no item");
-                    break;
-
-                case NO:
                     break;
 
                 case QUIT:
@@ -248,7 +245,7 @@ public class Game {
      */
     private void printItems()
     {
-        for(String item : playersItems){
+        for(String item : PLAYERS_ITEMS){
             if(!(item.equals("nothing"))) {
                 System.out.println(item);
             }
@@ -306,7 +303,7 @@ public class Game {
      */
         private void addItem (String item)
         {
-            playersItems.add(item);
+            PLAYERS_ITEMS.add(item);
         }
 }
 

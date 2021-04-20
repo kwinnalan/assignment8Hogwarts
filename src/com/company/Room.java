@@ -81,7 +81,7 @@ public class Room
     {
         String pickUpItemQuestion;
         if(!this.item.equals("no item")) {
-            pickUpItemQuestion = "Would you like to pick up the item? (enter command yes or no)";
+            pickUpItemQuestion = "Would you like to pick up the item? (enter command 'pickup' to collect)";
         }else{
             pickUpItemQuestion = "";
         }
